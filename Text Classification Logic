@@ -1,0 +1,21 @@
+# Training data for classification
+positive_training_data = [("positive article text", "Positive/Uplifting"), ...]
+negative_training_data = [("negative article text", "Terrorism/Protest/Political Unrest/Riot"), ...]
+training_data = positive_training_data + negative_training_data
+
+# Train the classifier
+def train_classifier():
+    all_words = []
+    for (words, category) in training_data:
+        all_words.extend(clean_text(words))
+    word_features = list(set(all_words))
+    training_set = [(clean_text(words), category) for (words, category) in training_data]
+    classifier = NaiveBayesClassifier.train(training_set)
+    return classifier
+
+# Update the classify_text function
+classifier = train_classifier()
+
+def classify_text(words):
+    category = classifier.classify(dict([(word, True) for word in words]))
+    return category
