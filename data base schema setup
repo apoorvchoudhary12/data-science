@@ -1,0 +1,12 @@
+# Model for the News Article
+class NewsArticle(Base):
+    __tablename__ = 'news_articles'
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    content = Column(String)
+    pub_date = Column(DateTime)
+    source_url = Column(String)
+    category = Column(String)
+
+    def __repr__(self):
+        return f"<NewsArticle(title={self.title}, category={self.category})>"
