@@ -1,0 +1,12 @@
+import pandas as pd
+
+# Fetch data from the database
+with Session() as session:
+    articles = session.query(NewsArticle).all()
+
+# Convert data to a DataFrame
+data = [(article.title, article.content, article.pub_date, article.source_url, article.category) for article in articles]
+df = pd.DataFrame(data, columns=['Title', 'Content', 'Publication Date', 'Source URL', 'Category'])
+
+# Export to CSV
+df.to_csv('resulting_data.csv', index=False)
